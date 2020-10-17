@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saxon.movies.model.network.QueryPersonMovie">
+
+    <resultMap id="person_movie" type="com.saxon.movies.model.dbEntity.PersonMovie">
+        <id property="idPersonMovie" column="ID"/>
+        <association property="actor" column="actorID" javaType="com.saxon.movies.model.dbEntity.actor">
+            <id property="actorID" column="actorID"/>
+            <result property="birthday" column="birthday"/>
+            <result property="name" column="name"/>
+            <result column="photo" property="photo"/>
+            <result property="role" column="role"/>
+        </association>
+        <association property="movies" column="movieID" javaType="com.saxon.movies.model.dbEntity.Movies">
+            <id property="movieID" column="movieID"/>
+            <result property="date" column="date"/>
+            <result property="image" column="image"/>
+            <result property="plot" column="plot"/>
+            <result property="title" column="title"/>
+        </association>
+    </resultMap>
+
+    <select id="QueryAllPersonMovie" resultMap="person_movie">
+     select * from person_movie pm
+     join movies m on m.movieID = pm.movieID
+     join actor a on pm.actorID = a.actorID
+  </select>
+    <select id="QueryPersonMovies" resultMap="person_movie">
+     select * from person_movie pm
+     join movies m on m.movieID = pm.movieID
+     join actor a on pm.actorID = a.actorID
+     where m.movieID=#{id}
+  </select>
+
+</mapper>

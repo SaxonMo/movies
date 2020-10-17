@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saxon.movies.model.network.QueryActor">
+    <select id="QueryAllActor" resultType="com.saxon.movies.model.dbEntity.actor">
+    select * from movies.actor
+  </select>
+
+    <select id="QueryActors" resultType="com.saxon.movies.model.dbEntity.actor">
+        select * from movies.actor
+        <where>
+            <if test="id!=null">actorID=#{id}</if>
+            <if test="birthday!=null">birthday=#{birthday}</if>
+            <if test="name!=null">name=#{name}</if>
+            <if test="role!=null">role=#{role}</if>
+        </where>
+    </select>
+    <insert id="insertActor">
+        insert into movies.actor
+        (actorID, birthday, name, photo, role)
+        values
+         (#{actorID},#{birthday},#{name},#{photo},#{role});
+    </insert>
+
+
+    <delete id="deleteActorByID">
+        delete from movies.actor where actorID=#{id}
+    </delete>
+    <update id="updateActor">
+        update movies.actor
+        <set>
+        <if test="name!=null">name=#{name},</if>
+        <if test="birthday!=null">birthday=#{birthday},</if>
+        <if test="photo!=null">photo=#{photo},</if>
+        <if test="role!=null">role=#{role}</if>
+        </set>
+        where actorID=#{actorID};
+    </update>
+</mapper>

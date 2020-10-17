@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>MOVIES</title>
+    <link rel="icon" th:href="@{../saxon/images/favicon.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Responsive Html5 Templates">
+    <meta name="author" content="">
+
+    <!-- styles -->
+
+    <link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" th:href="@{../css/style.css}">
+    <link rel="stylesheet" th:href="@{../css/menu.min.css}">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{../js/html5shiv.js}"></script>
+    <script th:src="@{../js/respond.min.js}"></script>
+    <![endif]-->
+</head>
+
+
+<body id="wrapper">
+
+<!-- /////////////////////////////////////////Navigation -->
+<button id="mm-menu-toggle" class="mm-menu-toggle">Toggle Menu</button>
+<nav id="mm-menu" class="mm-menu">
+    <div class="mm-menu__header">
+        <h2 class="mm-menu__title">MOVIES</h2>
+    </div>
+    <ul class="mm-menu__items">
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" th:href="@{/index}">
+                <span class="mm-menu__link-text"><i class="fa fa-home"></i> Home</span>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" onclick="gotoBlog()">
+                <span class="mm-menu__link-text"><i class="fa fa-user"></i> Blog</span>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" th:href="@{/saxon}">
+                <span class="mm-menu__link-text"><i class="fa fa-inbox"></i> About Me</span>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" th:href="@{/index}">
+                <span class="mm-menu__link-text"><i class="fa fa-heart"></i> Contact</span>
+            </a>
+        </li>
+    </ul>
+</nav><!-- /nav -->
+
+<!-- /////////////////////////////////////////Header -->
+<div class="top-header">
+    <div class="container">
+        <ul class="list-inline top-social">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+        </ul>
+    </div>
+</div>
+<div class="svg-container nav-svg svg-block">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1950 150">
+        <g transform="translate(0,-902.36218)"></g>
+        <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+        <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+        <path d="M 0,150 0,0 1925,0"></path>
+    </svg>
+</div>
+<header id="masthead" class="site-header" role="banner" style="background-position: 50% -120px;">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="site-branding">
+            <a href="index.html" title="KOMPLEET"><img class="site-logo" th:src="@{../images/logo.png}" alt="KOMPLEET"></a>
+        </div><!-- .site-branding -->
+    </div>
+    <div class="svg-container header-svg svg-block">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+            <g transform="translate(0,-902.36218)"></g>
+            <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+            <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+            <path d="m 1925,0 0,150 -1925,0"></path>
+        </svg>
+    </div>
+</header><!-- #masthead -->
+<!-- Header -->
+
+
+<!-- /////////////////////////////////////////Content -->
+<div id="page-content" class="sub-page">
+
+    <!-- //////////// -->
+    <article class="box-content container">
+        <div class="svg-container single-post-svg svg-block">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1890 150">
+                <g transform="translate(0,-902.36218)"></g>
+                <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+                <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+                <path d="m 1925,0 0,150 -1925,0"></path>
+            </svg>
+        </div>
+        <div class="post" style="">
+            <h1 class="entry-title"><p th:text="${movieSingle.title}"></p></h1>
+            <div class="single-thumb">
+                <img th:src="${movieSingle.image}" alt="About">
+            </div>
+            <div th:utext="${movieSingle.plot}"></div>
+
+            <!--				actor-->
+            <div th:if="${actors.size()!=0}"><h1>Starring</h1>
+                <a style="margin-left: 20px" type="button" class="btn btn-success" th:each="actor : ${actors}" th:text="${actor.actor.name}" th:href="@{/actor/}+${actor.actor.actorID}"></a>
+            </div>
+        </div>
+        <div class="svg-container single-post-svg single-svg-bottom svg-block">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1920 150">
+                <g transform="translate(0,-902.36218)"></g>
+                <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+                <path d="m 898.41609,-33.21176 0.01,0 -0.005,-0.009 -0.005,0.009 z"></path>
+                <path d="M 0,150 0,0 1925,0"></path>
+            </svg>
+        </div>
+    </article>
+
+    <script th:src="@{../js/jquery.js}"></script>
+
+    <!-- Menu Js -->
+    <script th:src="@{../js/materialMenu.js}"></script>
+    <script>
+        let menu = new Menu;
+    </script>
+    <!-- Bootstrap Core JavaScript -->
+    <script th:src="@{../js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saxon.movies.model.network.QueryCategory">
+    <select id="QueryAllCategories" resultType="com.saxon.movies.model.dbEntity.Category">
+        select * from movies.category
+    </select>
+    <select id="QueryCategoryByMap" resultType="com.saxon.movies.model.dbEntity.Category">
+        select * from movies.category
+        <where>
+            <if test="categoryID!=null">categoryID=#{categoryID}</if>
+            <if test="description!=null">description=#{description}</if>
+        </where>
+    </select>
+    <insert id="insertCategory">
+        insert into movies.category
+        (categoryID,description)
+        values
+         (#{categoryID},#{description});
+    </insert>
+    <update id="updateCategory">
+        update movies.category
+        set description=#{description}
+        where categoryID=#{categoryID}
+    </update>
+    <delete id="deleteCategoryByID">
+         delete from movies.category where categoryID=#{id}
+    </delete>
+</mapper>

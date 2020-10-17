@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saxon.movies.model.network.QueryMovies">
+    <resultMap id="category" type="com.saxon.movies.model.dbEntity.Movies">
+        <id property="movieID" column="movieID"/>
+        <result column="movieID" property="movieID"/>
+        <result column="title" property="title"/>
+        <result column="plot" property="plot"/>
+        <result column="image" property="image"/>
+        <result column="date" property="date"/>
+        <association property="category" column="categoryID" javaType="com.saxon.movies.model.dbEntity.Category">
+            <id property="categoryID" column="categoryID"/>
+            <result property="description" column="description"/>
+        </association>
+    </resultMap>
+
+    <select id="QueryAllMovies" resultMap="category">
+    select * from movies.movies
+    left join movies.category
+    on movies.categoryID=category.categoryID
+  </select>
+
+    <select id="QueryMovie" resultMap="category">
+        select * from  movies.movies
+        left join movies.category
+        on movies.categoryID=category.categoryID
+        <where>
+            <if test="id!=null">movieID=#{id}</if>
+            <if test="title!=null">title=#{title}</if>
+            <if test="categoryID!=null">categoryID=#{categoryID}</if>
+        </where>
+    </select>
+
+    <insert id="insertMovie">
+        insert into movies.movies
+        (movieID, title, plot, date, image, categoryID)
+        values
+         (#{movieID},#{title},#{plot},#{date},#{image},#{categoryID});
+    </insert>
+    <delete id="deleteMovieByID">
+        delete from movies.movies where movieID=#{id}
+    </delete>
+    <update id="updateMovies">
+        update movies.movies
+        <set>
+            <if test="title!=null">title=#{title},</if>
+            <if test="categoryID!=null">categoryID=#{categoryID},</if>
+            <if test="plot!=null">plot=#{plot},</if>
+            <if test="date!=null">date=#{date},</if>
+            <if test="image!=null">image=#{image}</if>
+        </set>
+        where movieID=#{movieID}
+    </update>
+</mapper>
